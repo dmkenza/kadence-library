@@ -4,8 +4,17 @@ import android.content.Context
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Toast
+import com.kadencelibrary.BuildConfig
 import com.kadencelibrary.extension.text.toJson
 
+
+fun Any.isDebug(): Boolean {
+    return BuildConfig.DEBUG
+}
+
+fun Any.isRelease(): Boolean {
+    return !BuildConfig.DEBUG
+}
 
 /**
  * Short function for debuging
