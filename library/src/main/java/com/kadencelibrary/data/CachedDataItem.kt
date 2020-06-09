@@ -2,24 +2,28 @@ package com.kadencelibrary.data
 
 import android.content.Context
 import com.google.gson.reflect.TypeToken
+import com.kadencelibrary.extension.debug.d
 import com.kadencelibrary.utils.CacheUtil
 
 
-interface CacheLiveDataDelegate {
-    fun getPrivateNameForFields(): String
-}
+// todo
 
 
 open class CachedDataItem<T>(
     val context: Context,
-    val delegate: CacheLiveDataDelegate?,
+    val delegate: CacheDelegate?,
     val name: String,
     val startValue: T? = null,
     val ttype: TypeToken<T>? = null
 ) {
 
+    interface CacheDelegate {
+        fun getSharedPrefencesFileName(): String
+    }
 
-    val cache: CacheUtil = CacheUtil(context, delegate?.getPrivateNameForFields() ?: "DefaultCache")
+
+    val cache: CacheUtil =
+        CacheUtil(context, delegate?.getSharedPrefencesFileName() ?: "DefaultCache")
 
 
     var value: T?
@@ -27,7 +31,7 @@ open class CachedDataItem<T>(
             cache.save(value, loadTag())
         }
         get() {
-            val pref = delegate?.getPrivateNameForFields()
+            val pref = delegate?.getSharedPrefencesFileName()
 
 
             val cached = cache.load<T>(loadTag(), ttype)
@@ -44,7 +48,6 @@ open class CachedDataItem<T>(
 
     var vl: T?
         set(value) {
-
             this.value = value
 
         }
@@ -69,7 +72,7 @@ open class CachedDataItem<T>(
 
 
     private fun loadTag(): String {
-        return "${delegate?.getPrivateNameForFields() ?: "none"}_$name\"".trim()
+        return "${delegate?.getSharedPrefencesFileName() ?: "none"}_$name\"".trim()
     }
 
 

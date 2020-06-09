@@ -12,31 +12,40 @@ import com.kadencelibrary.extension.text.toJson
  */
 
 
-fun Any.log(msg: String = "", e: Exception? = null) {
-    return LogWrapper.debug(msg, e)
+fun Any.log(log: String = "", e: Exception? = null) {
+    return LogWrapper.debug(log, e)
 }
 
-fun Any.d(msg: String = "", e: Exception? = null) {
-    return LogWrapper.debug(msg, e)
+fun Any.wrg(log: String = "", e: Exception? = null) {
+    return LogWrapper.warring(log, e)
 }
 
-fun Any.e(msg: String, e: Exception? = null) {
-    return LogWrapper.error(msg, e)
+fun Any.err(log: String = "", e: Exception? = null) {
+    return LogWrapper.error(log, e)
 }
 
-fun Any.e(msg: String) {
-    return LogWrapper.error(msg, null)
+
+fun Any.d(log: String = "", e: Exception? = null) {
+    return LogWrapper.debug(log, e)
 }
 
-fun Any.e(msg: String, e: Throwable? = null) {
+fun Any.e(log: String, e: Exception? = null) {
+    return LogWrapper.error(log, e)
+}
+
+fun Any.e(log: String) {
+    return LogWrapper.error(log, null)
+}
+
+fun Any.e(log: String, e: Throwable? = null) {
     return LogWrapper.error(
-        msg,
+        log,
         java.lang.Exception(e)
     )
 }
 
-fun Any.w(msg: String = "", e: Exception? = null) {
-    return LogWrapper.warring(msg, e)
+fun Any.w(log: String = "", e: Exception? = null) {
+    return LogWrapper.warring(log, e)
 }
 
 fun Any.w(e: Exception) {
@@ -54,8 +63,8 @@ fun Any.w(e: Throwable) {
 }
 
 
-fun Any.i(msg: String, e: Exception? = null) {
-    return LogWrapper.info(msg, e)
+fun Any.i(log: String, e: Exception? = null) {
+    return LogWrapper.info(log, e)
 }
 
 
