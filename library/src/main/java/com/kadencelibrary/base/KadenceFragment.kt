@@ -13,6 +13,7 @@ open class KadenceFragment : androidx.fragment.app.Fragment(), OnBackPressed {
 //
 //    val spotlightHelper : SpotlightHelper by lazy {
 //        (activity as KadenceActivity).spotlightHelper
+
 //    }
 //
 //    var nav : AppNavigator = CoreLibrary.comp.nav
