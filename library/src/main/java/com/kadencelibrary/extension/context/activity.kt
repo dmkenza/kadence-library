@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 
 
+
+
 fun AppCompatActivity.replaceFragment(layout: Int, fragment: Fragment) {
 
     val transaction = this.getSupportFragmentManager().beginTransaction();

@@ -9,8 +9,11 @@ import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.net.ConnectivityManager
 import android.os.Build
+import android.provider.MediaStore
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.kadencelibrary.utils.HideSoftKeyboardUtil
@@ -132,3 +135,9 @@ fun Context.toActivity(): AppCompatActivity? {
 
     return null
 }
+
+
+fun Context.getDrawableCompat(@DrawableRes drawableId: Int) =
+    ContextCompat.getDrawable(this, drawableId)
+
+fun Context.getColorCompat(@ColorRes colorId: Int) = ContextCompat.getColor(this, colorId)

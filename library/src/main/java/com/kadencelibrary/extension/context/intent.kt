@@ -31,6 +31,24 @@ inline fun <reified T : Any> Intent?.extra(key: String, default: T? = null): T? 
             }
         }
     }
+}
+
+inline fun <reified T : Any> Intent?.extraNotNull(key: String, default: T): T {
+    val value = this?.extras?.get(key)
+
+
+    when (T::class.java) {
+        Int::class.java, Boolean::class.java, Long::class.java, String::class.java -> {
+            return if (value is T) value else default
+        }
+        else -> {
+            return if (value != null) {
+                Gson().fromJson<T>(value as String)
+            } else {
+                default
+            }
+        }
+    }
 
 }
 

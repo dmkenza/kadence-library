@@ -6,7 +6,7 @@ import io.reactivex.disposables.CompositeDisposable
 /**
  * Created by Kenza on 04.06.2018.s
  */
-abstract class BaseService : Service() {
+abstract class KadenceService : Service() {
 
 
      val disposables = CompositeDisposable()

@@ -21,6 +21,8 @@ inline fun Any.postDelay(delay: Int = -1, crossinline func: () -> Unit) {
 
     var delay = delay
 
+
+
     if (delay <= -1) {
         delay = 0
     }
@@ -31,12 +33,45 @@ inline fun Any.postDelay(delay: Int = -1, crossinline func: () -> Unit) {
     }, delay.toLong())
 }
 
-//    val scale: Float
-//        get() {
-//            return CoreLibrary.comp.context.resources.getDisplayMetrics().density
-//        }
 
-//fun Int.toDp(): Int = (this * Help.scale + 0.5f).toInt()
+val Any.TAG0: String
+    get() {
+        return  if (!javaClass.isAnonymousClass) {
+            val name = javaClass.simpleName
+            // first 23 chars
+            if (name.length <= 23) name else name.substring(0, 23)
+        } else {
+            val name = javaClass.name
+            // last 23 chars
+            if (name.length <= 23) name else name.substring(name.length - 23, name.length)
+        }
+    }
+
+
+/**
+ * Internal Contract to be implemented by ViewModel
+ * Required to intercept and log ViewEvents
+ */
+interface ViewModelContract<EVENT> {
+    fun process(viewEvent: EVENT)
+}
+
+interface ChildViewModelContract<EVENT> {
+    /**
+     * @return boolean - true if task was processed.
+     */
+    fun process(viewEvent: EVENT): Boolean
+}
+
+
+
+
+/**
+ * This is a custom NoObserverAttachedException and it does what it's name suggests.
+ * Constructs a new exception with the specified detail message.
+ * This is thrown, if you have not attached any observer to the LiveData.
+ */
+class NoObserverAttachedException(message: String) : Exception(message)
 
 
 

@@ -1,11 +1,12 @@
 package com.kadencelibrary.base
 
 import androidx.lifecycle.ViewModelProvider
+import com.kadencelibrary.interfaces.OnBackPressed
 import io.reactivex.disposables.CompositeDisposable
 
-open class BaseFragment : androidx.fragment.app.Fragment (){
+open class KadenceFragment : androidx.fragment.app.Fragment(), OnBackPressed {
 
-    val disposable = CompositeDisposable()
+    val disposables = CompositeDisposable()
 
 //    val  dataRepo = CoreLibrary.comp.dataRepo
 //
@@ -19,11 +20,9 @@ open class BaseFragment : androidx.fragment.app.Fragment (){
 
     fun <T : KadenceVm> getViewModel(clazz: Class<T>): T {
 
-        if(context is KadenceActivity){
+        if (context is KadenceActivity) {
             return ViewModelProvider(this)[clazz]
-        }
-
-        else {// if(context is BaseActivity){
+        } else {// if(context is BaseActivity){
             return ViewModelProvider(this)[clazz]
         }
 
@@ -37,7 +36,7 @@ open class BaseFragment : androidx.fragment.app.Fragment (){
 //    }
 
     fun getBaseActivity(): KadenceActivity? {
-        return  activity as? KadenceActivity
+        return activity as? KadenceActivity
     }
 
 
@@ -48,7 +47,11 @@ open class BaseFragment : androidx.fragment.app.Fragment (){
 
     override fun onDestroy() {
         super.onDestroy()
-        disposable.clear()
+        disposables.clear()
+    }
+
+    override fun onBackPressed(): Boolean {
+        return true
     }
 
 

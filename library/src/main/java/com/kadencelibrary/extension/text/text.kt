@@ -184,3 +184,6 @@ fun getColoredHTMLText(text: String, color: String): String {
     return sb.toString()
 }
 
+fun Any.getDebugID(): String {
+    return this.toString().split(".").last()
+}

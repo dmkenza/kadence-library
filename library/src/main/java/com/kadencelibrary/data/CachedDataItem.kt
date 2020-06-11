@@ -6,7 +6,9 @@ import com.kadencelibrary.extension.debug.d
 import com.kadencelibrary.utils.CacheUtil
 
 
-// todo
+/**
+ * Class help keep any data in shared preferences.
+ */
 
 
 open class CachedDataItem<T>(
@@ -76,21 +78,6 @@ open class CachedDataItem<T>(
     }
 
 
-    fun getCachedValue(): T? {
-
-
-        val cached = cache.load<T>(loadTag(), ttype)
-
-
-        if (cached == null) {
-            vl = startValue
-            return startValue
-        }
-
-        vl = cached
-        return cached
-
-    }
 
 
 }

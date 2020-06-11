@@ -4,17 +4,11 @@ import android.content.Context
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Toast
-import com.kadencelibrary.BuildConfig
+import androidx.annotation.MainThread
 import com.kadencelibrary.extension.text.toJson
 
 
-fun Any.isDebug(): Boolean {
-    return BuildConfig.DEBUG
-}
 
-fun Any.isRelease(): Boolean {
-    return !BuildConfig.DEBUG
-}
 
 /**
  * Short function for debuging
@@ -76,19 +70,19 @@ fun Any.i(log: String, e: Exception? = null) {
     return LogWrapper.info(log, e)
 }
 
-
+@MainThread
 fun Any.toast(context: Context, msg: String) {
-    Toast.makeText(context, msg, Toast.LENGTH_LONG).show()
+    Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
 }
 
 
 fun androidx.fragment.app.Fragment.toast(msg: String) {
-    Toast.makeText(this.activity, msg, Toast.LENGTH_LONG).show()
+    Toast.makeText(this.activity, msg, Toast.LENGTH_SHORT).show()
 }
 
-
+@MainThread
 fun Context.toast(msg: String) {
-    Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
+    Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
 }
 
 
