@@ -9,7 +9,12 @@ import androidx.fragment.app.FragmentTransaction
 
 typealias FragmentFactory<F> = () -> F
 
-inline fun <F : Fragment> FragmentManager.popOrReplaceRoot(
+/**
+ * Find existing fragment by tag and replace container
+ * or add new fragment to container and clear backstack.
+ */
+
+inline fun <F : Fragment> FragmentManager.popOrReplaceStack(
     replacement: Replacement<F>,
     tag: String
 ): F {
@@ -21,6 +26,9 @@ inline fun <F : Fragment> FragmentManager.popOrReplaceRoot(
     return fragment
 }
 
+/**
+ * Add fragment to container add to backstack.
+ */
 
 inline fun <F : Fragment> FragmentManager.addToStack(
     replacement: Replacement<F>,
@@ -30,6 +38,10 @@ inline fun <F : Fragment> FragmentManager.addToStack(
     transaction { addToBackStack(replacement.containerId, fragment, tag, false) }
     return fragment
 }
+
+/**
+ * Add fragment to container add to backstack.
+ */
 
 
 inline fun <F : Fragment> FragmentManager.addToStack(

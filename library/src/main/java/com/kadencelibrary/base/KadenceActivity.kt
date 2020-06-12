@@ -25,6 +25,10 @@ open class KadenceActivity : AppCompatActivity() {
     var wasRestored = false
 
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
+
     override fun onSupportNavigateUp(): Boolean {
         finish()
         return true
