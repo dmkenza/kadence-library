@@ -1,12 +1,15 @@
 package com.kadencelibrary.extension.view
 
 import android.view.View
+import android.view.animation.LinearInterpolator
 import android.view.animation.OvershootInterpolator
 import io.reactivex.Completable
 
 /**
  * Animation functions for View.
  */
+
+
 
 fun View.moveUp(offset: Float = 0f, duration: Long = 1000): Completable {
     return Completable.create {
@@ -17,8 +20,6 @@ fun View.moveUp(offset: Float = 0f, duration: Long = 1000): Completable {
             offset = this.height * 1f
         }
 
-
-
         visibility = View.VISIBLE
         translationY = offset
         translationX = 0f
@@ -27,7 +28,7 @@ fun View.moveUp(offset: Float = 0f, duration: Long = 1000): Completable {
         animate()
             .translationY(0f)
             .setDuration(duration)
-            .setInterpolator(OvershootInterpolator())
+            .setInterpolator(LinearInterpolator())
             .withEndAction(it::onComplete)
 
     }
@@ -52,15 +53,23 @@ fun View.moveDown(offset: Float = 0f, duration: Long = 1000): Completable {
         animate()
             .translationY(offset)
             .setDuration(duration)
-            .setInterpolator(OvershootInterpolator())
+            .setInterpolator(LinearInterpolator())
             .withEndAction(it::onComplete)
     }
 }
 
 
-fun View.slideIn(offset: Float): Completable {
+fun View.slideIn(offset: Float = 0f, duration: Long = 1000): Completable {
     return Completable.create {
+
+        var offset = offset
+
         visibility = View.VISIBLE
+
+        if (offset == 0f) {
+            offset = this.height * 1f
+        }
+
         alpha = 0f
         scaleX = 0f
         scaleY = 0f
@@ -72,8 +81,8 @@ fun View.slideIn(offset: Float): Completable {
             .translationY(0f)
             .scaleX(1f)
             .scaleY(1f)
-            .setDuration(200)
-            .setInterpolator(OvershootInterpolator())
+            .setDuration(duration)
+            .setInterpolator(LinearInterpolator())
             .withEndAction(it::onComplete)
     }
 }
@@ -93,7 +102,7 @@ fun View.slideLeft(offset: Float): Completable {
             .scaleX(0f)
             .scaleY(0f)
             .setDuration(200)
-            .setInterpolator(OvershootInterpolator())
+            .setInterpolator(LinearInterpolator())
             .withEndAction(it::onComplete)
     }
 }
@@ -112,7 +121,7 @@ fun View.slideRight(offset: Float): Completable {
             .scaleX(0f)
             .scaleY(0f)
             .setDuration(200)
-            .setInterpolator(OvershootInterpolator())
+            .setInterpolator(LinearInterpolator())
             .withEndAction(it::onComplete)
     }
 }

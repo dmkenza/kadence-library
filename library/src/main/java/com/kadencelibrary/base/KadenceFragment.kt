@@ -48,8 +48,8 @@ open class KadenceFragment : androidx.fragment.app.Fragment(), OnBackPressed {
 
 
     override fun onDestroy() {
-        super.onDestroy()
         disposables.clear()
+        super.onDestroy()
     }
 
     override fun onBackPressed(): Boolean {

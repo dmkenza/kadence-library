@@ -6,6 +6,7 @@ import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.kadencelibrary.R
 
 typealias FragmentFactory<F> = () -> F
 
@@ -14,14 +15,15 @@ typealias FragmentFactory<F> = () -> F
  * or add new fragment to container and clear backstack.
  */
 
-inline fun <F : Fragment> FragmentManager.popOrReplaceStack(
+inline fun <F : Fragment> FragmentManager.popOrReplace(
     replacement: Replacement<F>,
-    tag: String
+    tag: String,
+    animate: Boolean = true
 ): F {
     var fragment = pop<F>(tag)
     if (fragment == null) {
         fragment = replacement.fragmentFactory()
-        transaction { newBackStack(replacement.containerId, fragment, tag, false) }
+        transaction { newBackStack(replacement.containerId, fragment, tag, animate) }
     }
     return fragment
 }
@@ -32,10 +34,11 @@ inline fun <F : Fragment> FragmentManager.popOrReplaceStack(
 
 inline fun <F : Fragment> FragmentManager.addToStack(
     replacement: Replacement<F>,
-    tag: String
+    tag: String,
+    animate: Boolean = true
 ): F {
     val fragment = replacement.fragmentFactory()
-    transaction { addToBackStack(replacement.containerId, fragment, tag, false) }
+    transaction { addToBackStack(replacement.containerId, fragment, tag, animate) }
     return fragment
 }
 
@@ -47,9 +50,10 @@ inline fun <F : Fragment> FragmentManager.addToStack(
 inline fun <F : Fragment> FragmentManager.addToStack(
     fragment: F,
     containerId: Int,
-    tag: String
+    tag: String,
+    animate: Boolean = true
 ): F {
-    transaction { addToBackStack(containerId, fragment, tag, false) }
+    transaction { addToBackStack(containerId, fragment, tag, animate) }
     return fragment
 }
 
@@ -109,8 +113,8 @@ class FragmentTransactionBuilder constructor(
         animate: Boolean = false
     ) {
         fragmentManager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-        fragmentManager.commitNow(allowStateLoss = allowStateLoss) {
-            if (animate) setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+        fragmentManager.commitNow(allowStateLoss = allowStateLoss, animate = animate) {
+//            if (animate) setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             replace(containerId, fragment, tag)
         }
     }
@@ -121,9 +125,9 @@ class FragmentTransactionBuilder constructor(
         tag: String,
         animate: Boolean = true
     ) {
-        fragmentManager.commit(allowStateLoss = allowStateLoss) {
+        fragmentManager.commit(allowStateLoss = allowStateLoss, animate = animate) {
             addToBackStack(tag)
-            if (animate) setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+//            if (animate) setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             replace(containerId, fragment, tag)
         }
     }
@@ -132,27 +136,51 @@ class FragmentTransactionBuilder constructor(
 
 inline fun FragmentManager.commit(
     allowStateLoss: Boolean = false,
+    animate: Boolean = true,
     body: FragmentTransaction.() -> Unit
 ) {
-    val transaction = beginTransaction()
-    transaction.body()
+    val ft = beginTransaction()
+
+    if (animate) {
+        ft.setCustomAnimations(
+            R.anim.fragment_slide_left_enter,
+            R.anim.fragment_slide_left_exit,
+            R.anim.fragment_slide_right_enter,
+            R.anim.fragment_slide_right_exit
+        )
+    }
+
+
+    ft.body()
     if (allowStateLoss) {
-        transaction.commitAllowingStateLoss()
+        ft.commitAllowingStateLoss()
     } else {
-        transaction.commit()
+        ft.commit()
     }
     executePendingTransactions()
 }
 
 inline fun FragmentManager.commitNow(
     allowStateLoss: Boolean = false,
+    animate: Boolean = true,
     body: FragmentTransaction.() -> Unit
 ) {
-    val transaction = beginTransaction()
-    transaction.body()
+    val ft = beginTransaction()
+
+    if (animate) {
+        ft.setCustomAnimations(
+            R.anim.fragment_slide_left_enter,
+            R.anim.fragment_slide_left_exit,
+            R.anim.fragment_slide_right_enter,
+            R.anim.fragment_slide_right_exit
+        )
+    }
+
+
+    ft.body()
     if (allowStateLoss) {
-        transaction.commitNowAllowingStateLoss()
+        ft.commitNowAllowingStateLoss()
     } else {
-        transaction.commitNow()
+        ft.commitNow()
     }
 }

@@ -27,6 +27,13 @@ fun Any.err(log: String = "", e: Exception? = null) {
     return LogWrapper.error(log, e)
 }
 
+fun Any.err(log: String, e: Throwable? = null) {
+    return LogWrapper.error(
+        log,
+        java.lang.Exception(e)
+    )
+}
+
 
 fun Any.d(log: String = "", e: Exception? = null) {
     return LogWrapper.debug(log, e)
@@ -36,16 +43,16 @@ fun Any.e(log: String, e: Exception? = null) {
     return LogWrapper.error(log, e)
 }
 
-fun Any.e(log: String) {
+fun Any.err(log: String) {
     return LogWrapper.error(log, null)
 }
 
-fun Any.e(log: String, e: Throwable? = null) {
-    return LogWrapper.error(
-        log,
-        java.lang.Exception(e)
-    )
+
+
+fun Any.err(e: Exception) {
+    return LogWrapper.warring("", e)
 }
+
 
 fun Any.w(log: String = "", e: Exception? = null) {
     return LogWrapper.warring(log, e)

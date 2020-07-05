@@ -1,6 +1,10 @@
 package com.kadencelibrary.extension.view
 
+import android.R
+import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +12,8 @@ import android.view.ViewTreeObserver
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.annotation.ColorRes
+import androidx.appcompat.widget.AppCompatRadioButton
+import androidx.appcompat.widget.SwitchCompat
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
@@ -142,3 +148,24 @@ fun RecyclerView.isLastItemVisible(): Boolean {
     return false;
 
 }
+
+
+fun SwitchCompat.setCheckBoxColor(checkedColor: Int) {
+
+    DrawableCompat.setTintList(
+        this.getThumbDrawable(), ColorStateList(
+            arrayOf(intArrayOf(R.attr.state_checked), intArrayOf()),
+            intArrayOf(checkedColor, Color.WHITE)
+        )
+    )
+}
+
+@SuppressLint("RestrictedApi")
+fun AppCompatRadioButton.setCheckBoxColor(uncheckedColor: Int, checkedColor: Int) {
+    val colorStateList = ColorStateList(
+        arrayOf(intArrayOf(-R.attr.state_checked), intArrayOf(R.attr.state_checked)),
+        intArrayOf(uncheckedColor, checkedColor)
+    )
+    this.supportButtonTintList = colorStateList
+}
+

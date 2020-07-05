@@ -35,7 +35,7 @@ object HideSoftKeyboardUtil {
         imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
-    fun softHide(fragment: androidx.fragment.app.Fragment) {
+    private fun softHide(fragment: androidx.fragment.app.Fragment) {
         try {
             val inputMethodManager = fragment.context?.getSystemService(
                 Activity.INPUT_METHOD_SERVICE
@@ -68,9 +68,9 @@ object HideSoftKeyboardUtil {
     }
 
     /**
-     * For fialog
+     * For dialog
      */
-    fun softHide(dialog: AppCompatDialog) {
+    private fun softHide(dialog: AppCompatDialog) {
 
         try {
             val inputMethodManager = dialog.context.getSystemService(
@@ -85,7 +85,7 @@ object HideSoftKeyboardUtil {
 
     }
 
-    fun softHide(dialog: Dialog) {
+    private fun softHide(dialog: Dialog) {
 
         try {
             val inputMethodManager = dialog.context.getSystemService(
@@ -170,7 +170,7 @@ object HideSoftKeyboardUtil {
 
     }
 
-    fun softHide(activity: Activity) {
+    private fun softHide(activity: Activity) {
 
         try {
             val inputMethodManager = activity.getSystemService(

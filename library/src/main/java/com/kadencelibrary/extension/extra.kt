@@ -2,6 +2,7 @@ package com.kadencelibrary.extension
 
 import android.content.Context
 import android.content.Intent
+import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.badoo.mobile.util.WeakHandler
@@ -10,6 +11,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 import kotlin.collections.ArrayList
+
+fun Any.isMainThread() = Looper.myLooper() == Looper.getMainLooper()
 
 
 fun <E> List<E>.random(random: java.util.Random = Random()): E? = if (size > 0) get(random.nextInt(size)) else null
@@ -58,7 +61,7 @@ interface ViewModelContract<EVENT> {
 
 interface ChildViewModelContract<EVENT> {
     /**
-     * @return boolean - true if task was processed.
+     * @return boolean - true if task need be processed by child view model.
      */
     fun process(viewEvent: EVENT): Boolean
 }

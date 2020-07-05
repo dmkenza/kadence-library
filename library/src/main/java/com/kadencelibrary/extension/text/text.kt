@@ -3,6 +3,7 @@ package com.kadencelibrary.extension.text
 import android.os.Build
 import android.text.Editable
 import android.text.Html
+import android.text.InputFilter
 import android.text.TextWatcher
 import android.widget.EditText
 import android.widget.TextView
@@ -17,6 +18,21 @@ import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.regex.Pattern
+
+
+fun EditText.setTextLimit(limit: Int) {
+
+
+//    val FilterArray = arrayOfNulls<InputFilter>(1)
+//    FilterArray[0] = InputFilter.LengthFilter(limit)
+//    this.setFilters(FilterArray)
+
+
+    val list = this.filters.toMutableList()
+    list.add(InputFilter.LengthFilter(limit))
+    this.setFilters(list.toTypedArray());
+
+}
 
 
 fun Any.toJson(): String? = Gson().toJson(this)
@@ -101,8 +117,6 @@ fun String.getBaseUrl(): String {
     return baseUrl
 
 }
-
-
 
 
 /**

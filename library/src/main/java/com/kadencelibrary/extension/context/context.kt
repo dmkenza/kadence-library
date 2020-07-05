@@ -7,6 +7,7 @@ import android.content.ContextWrapper
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Configuration
+import android.graphics.Point
 import android.net.ConnectivityManager
 import android.os.Build
 import android.provider.MediaStore
@@ -19,7 +20,10 @@ import androidx.core.content.ContextCompat
 import com.kadencelibrary.utils.HideSoftKeyboardUtil
 
 
-/** KeyBoard functions. */
+
+
+
+/** Hide keyboard. */
 
 fun hideKeyBoard(context: Context) {
     val act = (context as Activity)
