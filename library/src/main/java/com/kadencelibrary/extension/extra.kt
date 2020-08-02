@@ -63,7 +63,7 @@ interface ChildViewModelContract<EVENT> {
     /**
      * @return boolean - true if task need be processed by child view model.
      */
-    fun process(viewEvent: EVENT): Boolean
+    fun processChildEvent(viewEvent: EVENT): Boolean
 }
 
 

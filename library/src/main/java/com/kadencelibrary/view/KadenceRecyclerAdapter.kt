@@ -11,6 +11,9 @@ import kotlinx.android.extensions.LayoutContainer
 abstract class KadenceRecyclerAdapter<T>() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
+    protected lateinit var context: Context
+
+
     abstract var data: List<T>
     abstract var layout_main_id: Int
 
@@ -66,6 +69,12 @@ abstract class KadenceRecyclerAdapter<T>() : RecyclerView.Adapter<RecyclerView.V
         disposables.clear();
         disposables.dispose();
     }
+
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+        super.onAttachedToRecyclerView(recyclerView)
+        context = recyclerView.context
+    }
+
 
     companion object {
 

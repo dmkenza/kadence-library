@@ -23,6 +23,11 @@ fun Any.wrg(log: String = "", e: Exception? = null) {
     return LogWrapper.warring(log, e)
 }
 
+fun Any.wrg( e: Exception? = null) {
+    return LogWrapper.warring("", e)
+}
+
+
 fun Any.err(log: String = "", e: Exception? = null) {
     return LogWrapper.error(log, e)
 }

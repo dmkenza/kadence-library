@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.Transparent" parent="android:Theme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+
+    <!-- Стиль анимации для seekbar2 -->
+    <style name="IndicatorAnimation">
+        <item name="android:windowEnterAnimation">@anim/show_indicator</item>
+        <item name="android:windowExitAnimation">@anim/hide_indicator</item>
+    </style>
+
+</resources>

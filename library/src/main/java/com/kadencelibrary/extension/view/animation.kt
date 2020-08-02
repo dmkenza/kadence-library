@@ -11,7 +11,7 @@ import io.reactivex.Completable
 
 
 
-fun View.moveUp(offset: Float = 0f, duration: Long = 1000): Completable {
+fun View.moveUp( duration: Long = 1000, offset: Float = 0f): Completable {
     return Completable.create {
         var offset = offset
 
@@ -35,7 +35,7 @@ fun View.moveUp(offset: Float = 0f, duration: Long = 1000): Completable {
 }
 
 
-fun View.moveDown(offset: Float = 0f, duration: Long = 1000): Completable {
+fun View.moveDown( duration: Long = 1000, offset: Float = 0f): Completable {
     return Completable.create {
         var offset = offset
 
@@ -59,7 +59,7 @@ fun View.moveDown(offset: Float = 0f, duration: Long = 1000): Completable {
 }
 
 
-fun View.slideIn(offset: Float = 0f, duration: Long = 1000): Completable {
+fun View.slideIn( duration: Long = 1000, offset: Float = 0f): Completable {
     return Completable.create {
 
         var offset = offset

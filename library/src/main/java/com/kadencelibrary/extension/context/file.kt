@@ -88,6 +88,8 @@ fun File.toBitmap(): Bitmap {
 }
 
 
+
+
 /**
  * @param path the path to the Video
  * @return a thumbnail of the video or null if retrieving the thumbnail failed.

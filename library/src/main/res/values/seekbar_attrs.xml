@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SeekbarWithIndicator">
+        <attr name="indicatorTextColor" format="color" />
+        <attr name="indicatorImageSource" format="reference" />
+        <attr name="indicatorMargin" format="float" />
+        <attr name="indicatorStyleAnimation" format="integer" />
+    </declare-styleable>
+</resources>
