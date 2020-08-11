@@ -1,34 +1,105 @@
 package com.kadencelibrary.utils
 
+import android.R
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.*
 import android.graphics.drawable.shapes.RoundRectShape
+import android.os.Build
+import android.view.View
 import java.util.*
 
-/** Help generate drawable with ripple_semi_rectangle effect  */
+object RippleDrawableHelper {
+    fun createRippleDrawable(v: View, color: Int, drawableResource: Int): Drawable {
+        return createRippleDrawable(
+            v,
+            color,
+            v.context.resources.getDrawable(drawableResource)
+        )
+    }
 
-object DrawablesCreaterUtil {
-
-
-    fun getRectangle(
-        color: Int
+    @JvmOverloads
+    fun createRippleDrawable(
+        v: View,
+        color: Int,
+        pressed: Drawable? = null
     ): Drawable {
+        var pressed = pressed
+        var drawable = v.background
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            if (drawable is RippleDrawable) {
+                drawable = drawable.getDrawable(0)
+
+                val pressedColor: Int = lightenOrDarken(color, 0.35)
 
 
-        val background = ColorDrawable()
-        background.setColor(color)
-        return background
-
+                RippleDrawable(
+                    ColorStateList(
+                        arrayOf(
+                            intArrayOf(R.attr.state_pressed),
+                            intArrayOf(R.attr.state_focused),
+                            intArrayOf(R.attr.state_activated),
+                            intArrayOf()
+                        ), intArrayOf(
+                            pressedColor,
+                            pressedColor,
+                            pressedColor,
+                            pressedColor
+                        )
+                    ), drawable, null
+                )
+            } else {
+                if (drawable == null) {
+                    drawable = ColorDrawable(0)
+                    v.background = drawable
+                    RippleDrawable(
+                        ColorStateList(
+                            arrayOf(
+                                intArrayOf(R.attr.state_pressed),
+                                intArrayOf(0)
+                            ), intArrayOf(color, 0)
+                        ), drawable, ColorDrawable(-0x1)
+                    )
+                } else {
+                    RippleDrawable(
+                        ColorStateList(
+                            arrayOf(
+                                intArrayOf(R.attr.state_pressed),
+                                intArrayOf(0)
+                            ), intArrayOf(color, 0)
+                        ), drawable, null
+                    )
+                }
+            }
+        } else {
+            if (drawable == null) {
+                drawable = ColorDrawable(color)
+            }
+            if (pressed == null) {
+                pressed = drawable
+            }
+            val sld =
+                StateListDrawable()
+            sld.addState(
+                intArrayOf(
+                    R.attr.state_pressed
+                ),
+                pressed
+            )
+            if (v.background != null) {
+                sld.addState(
+                    intArrayOf(
+                        0
+                    ),
+                    drawable
+                )
+            }
+            sld
+        }
     }
 
 
-    fun getDrawableFor(
-        color: Int,
-        cornerRadius: Float,
-        borderColor: Int? = null,
-        borderWidth: Int? = null
-    ): Drawable {
+    fun getDrawableFor(color: Int, cornerRadius: Float, borderColor: Int? = null, borderWidth: Int? = null): Drawable {
 
 
         val background = GradientDrawable()
@@ -46,12 +117,7 @@ object DrawablesCreaterUtil {
     }
 
 
-    fun Drawable.getSelectableDrawableFor(
-        color: Int,
-        cornerRadius: Float,
-        borderColor: Int? = null,
-        borderWidth: Int? = null
-    ): Drawable {
+    fun Drawable.getSelectableDrawableFor(color: Int, cornerRadius : Float, borderColor: Int? = null, borderWidth : Int? =null): Drawable {
 
 
         val background = GradientDrawable()
@@ -78,12 +144,14 @@ object DrawablesCreaterUtil {
         val rippleColorLst = ColorStateList.valueOf(lightenOrDarken(color, 0.2))
 
         val ripple = RippleDrawable(rippleColorLst, background, mask)
-        return ripple
+        return  ripple
 
     }
 
 
-    private fun getRippleColor(color: Int): Drawable {
+
+
+    fun getRippleColor(color: Int): Drawable {
         val outerRadii = FloatArray(8)
         Arrays.fill(outerRadii, 3f)
         val r = RoundRectShape(outerRadii, null, null)
@@ -92,7 +160,7 @@ object DrawablesCreaterUtil {
         return shapeDrawable
     }
 
-    private fun lightenOrDarken(color: Int, fraction: Double): Int {
+    fun lightenOrDarken(color: Int, fraction: Double): Int {
         return if (canLighten(color, fraction)) {
             lighten(color, fraction)
         } else {
@@ -145,4 +213,5 @@ object DrawablesCreaterUtil {
     private fun lightenColor(color: Int, fraction: Double): Int {
         return Math.min(color + color * fraction, 255.0).toInt()
     }
+
 }

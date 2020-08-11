@@ -1,4 +1,4 @@
-package com.kadencelibrary.view
+package com.kadencelibrary.base
 
 import android.content.Context
 import android.util.AttributeSet

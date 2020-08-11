@@ -1,5 +1,6 @@
 package com.kadencelibrary.extension.view
 
+import android.os.Build
 import android.widget.ImageView
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
@@ -14,3 +15,14 @@ fun ImageView.setTintColor(@ColorRes resColor: Int) {
         android.graphics.PorterDuff.Mode.SRC_IN
     )
 }
+fun ImageView.setBackgroundTintColor(@ColorRes resColor: Int) {
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        this.backgroundTintList = context.getResources().getColorStateList(resColor, null)
+    }else{
+        this.backgroundTintList = context.getResources().getColorStateList(resColor)
+    }
+
+}
+
+

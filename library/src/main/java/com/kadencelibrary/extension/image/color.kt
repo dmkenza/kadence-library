@@ -87,7 +87,7 @@ fun Bitmap.getResizedBitmap(newWidth: Int, newHeight: Int): Bitmap? {
     return resizedBitmap
 }
 
-/** add ripple  effect to drawable */
+/** add ripple_semi_rectangle  effect to drawable */
 fun Drawable.getRippleBackgroundDrawable(pressedColor: Int): RippleDrawable {
     return RippleDrawable(getPressedState(pressedColor)!!, this, null)
 }

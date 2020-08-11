@@ -8,7 +8,7 @@ fun Double.roundTo(numFractionDigits: Int): Double {
     return (this * factor).roundToInt() / factor
 }
 
-fun Float.roundTo(numFractionDigits: Int): Double {
+fun Float.roundTo(numFractionDigits: Int): Float {
     val factor = 10.0.pow(numFractionDigits.toDouble())
-    return (this * factor).roundToInt() / factor
+    return ((this * factor).roundToInt() / factor).toFloat()
 }

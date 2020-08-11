@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="horizontal" >
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/bt_minus"
+
+        android:layout_width="match_parent"
+
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+
+        android:background="@drawable/ripple_semi_rectangle"
+        android:backgroundTint="@color/blue_haze"
+
+        android:padding="18dp"
+        android:tint="@color/white"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/bt_plus"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        app:srcCompat="@drawable/icx_minus"
+
+
+        />
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/bt_plus"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:layout_weight="1"
+
+        android:rotation="180"
+        android:background="@drawable/ripple_semi_rectangle"
+        android:backgroundTint="@color/blue_haze"
+        android:padding="18dp"
+
+        android:tint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/bt_minus"
+        app:layout_constraintTop_toTopOf="parent"
+
+        app:srcCompat="@drawable/icx_plus"
+
+        />
+
+</LinearLayout>

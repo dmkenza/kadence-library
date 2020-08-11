@@ -1,8 +1,10 @@
+import android.view.View
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers.computation
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.ReceiveChannel
+import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.channels.produce
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.selects.select
@@ -10,6 +12,13 @@ import java.util.*
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 
+
+fun View.clicks(): Flow<Unit> = callbackFlow {
+    this@clicks.setOnClickListener {
+        this.offer(Unit)
+    }
+    awaitClose { this@clicks.setOnClickListener(null) }
+}
 
 
 

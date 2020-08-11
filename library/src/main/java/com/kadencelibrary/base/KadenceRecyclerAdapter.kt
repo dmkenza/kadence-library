@@ -1,4 +1,4 @@
-package com.kadencelibrary.view
+package com.kadencelibrary.base
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -20,7 +20,8 @@ abstract class KadenceRecyclerAdapter<T>() : RecyclerView.Adapter<RecyclerView.V
     val disposables = CompositeDisposable()
 
 
-    abstract inner class BaseRViewHolder(var view: View) : RecyclerView.ViewHolder(view), Binder<T>,
+    abstract inner class BaseRViewHolder(var view: View) : RecyclerView.ViewHolder(view),
+        Binder<T>,
         LayoutContainer {
         abstract override fun bind(item: T)
 

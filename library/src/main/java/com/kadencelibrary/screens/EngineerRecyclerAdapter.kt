@@ -2,7 +2,7 @@ package com.kadencelibrary.screens
 
 import android.view.View
 import com.kadencelibrary.R
-import com.kadencelibrary.view.KadenceRecyclerAdapter
+import com.kadencelibrary.base.KadenceRecyclerAdapter
 import kotlinx.android.synthetic.main.item_debug.view.*
 
 class EngineerRecyclerAdapter(val delegate: DebugRecyclerDelegate) :

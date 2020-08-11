@@ -13,3 +13,4 @@ import kotlin.collections.ArrayList
 fun <A, B> List<A>.parallelMap(f: suspend (A) -> B): List<B> = runBlocking {
     map { async(Dispatchers.Default) { f(it) } }.map { it.await() }
 }
+

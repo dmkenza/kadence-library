@@ -40,6 +40,7 @@ dependencies {
     //size of java objects
     api group: 'com.github.fracpete', name: 'sizeofag', version: '1.0.4'
 
+
     // log viewer
     api 'com.github.sanyinchen:LogView:v1.0'
 
@@ -58,7 +59,7 @@ dependencies {
 //    api "com.google.android.material:material:1.3.0-alpha01"
 
     // Design.
-    api "com.google.android.material:material:1.3.0-alpha01"
+    api "com.google.android.material:material:1.3.0-alpha02"
     api "androidx.recyclerview:recyclerview:1.1.0"
 
 
