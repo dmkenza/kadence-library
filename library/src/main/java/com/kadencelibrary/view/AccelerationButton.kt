@@ -12,6 +12,7 @@ import android.widget.FrameLayout
 import androidx.annotation.ColorRes
 import com.kadencelibrary.R
 import com.kadencelibrary.extension.context.getColorCompat
+import com.kadencelibrary.extension.debug.log
 import com.kadencelibrary.extension.view.setBackgroundTintColor
 import com.kadencelibrary.extension.view.setTintColor
 import com.kadencelibrary.utils.RippleDrawableHelper
@@ -104,20 +105,20 @@ open class AccelerationButton @JvmOverloads constructor(
 
         bt_minus.setOnClickListener {
 
-            if (contract.onValueRequested() - 1 > min) {
-                val value = contract.onValueRequested()
-                contract.onValueChanged(value - 1, value)
-            }
+//            if (contract.onValueRequested() - 1 > min) {
+//                val value = contract.onValueRequested()
+//                contract.onValueChanged(value - 1, value)
+//            }
 
         }
 
 
         bt_plus.setOnClickListener {
 
-            if (contract.onValueRequested() + 1 < max) {
-                val value = contract.onValueRequested()
-                contract.onValueChanged(value + 1, value)
-            }
+//            if (contract.onValueRequested() + 1 < max) {
+//                val value = contract.onValueRequested()
+//                contract.onValueChanged(value + 1, value)
+//            }
         }
 
 
@@ -151,6 +152,8 @@ open class AccelerationButton @JvmOverloads constructor(
 
         bt_minus.setOnTouchListener { v, event ->
 
+            log("OnTouchListener $event")
+
             when (event.action) {
 
                 MotionEvent.ACTION_DOWN -> {
@@ -182,6 +185,8 @@ open class AccelerationButton @JvmOverloads constructor(
 
         override fun onTick(millisUntilFinished: Long) {
 
+            log("onTick ")
+
             var factor = 1
 
             if (count <= 5) {
@@ -211,6 +216,7 @@ open class AccelerationButton @JvmOverloads constructor(
 
                 val value = contract?.onValueRequested() ?: 0L
                 contract?.onValueChanged(value + dx, value)
+                return
             }
 
             if (y + dx > max) {
@@ -220,7 +226,9 @@ open class AccelerationButton @JvmOverloads constructor(
             if (y + dx <= max && dx > 0) {
                 val value = contract?.onValueRequested() ?: 0L
                 contract?.onValueChanged(value + dx, value)
+                return
             }
+
 
         }
 

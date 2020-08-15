@@ -8,10 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.TextView
+import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.kadencelibrary.R
+import com.kadencelibrary.extension.context.getColorCompat
+import com.kadencelibrary.extension.view.setBackgroundTintColor
 import kotlinx.android.synthetic.main.custom_rounded_view.view.*
 
 /**
@@ -28,6 +31,16 @@ class RoundedImageView @JvmOverloads constructor(
 
     init {
         LayoutInflater.from(context).inflate(R.layout.custom_rounded_view, this, true)
+    }
+
+
+    fun setCircleColor(@ColorRes colorRes : Int  ) {
+        layout_border.setBackgroundTintColor(colorRes)
+    }
+
+
+    fun setCirclePadding(padding: Int ) {
+        layout_border.setPadding(padding, padding, padding,padding)
     }
 
 

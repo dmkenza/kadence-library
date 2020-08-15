@@ -19,7 +19,7 @@
         android:background="@drawable/ripple_semi_rectangle"
         android:backgroundTint="@color/blue_haze"
 
-        android:padding="18dp"
+        android:padding="8dp"
         android:tint="@color/white"
 
         app:layout_constraintBottom_toBottomOf="parent"
@@ -44,7 +44,7 @@
         android:rotation="180"
         android:background="@drawable/ripple_semi_rectangle"
         android:backgroundTint="@color/blue_haze"
-        android:padding="18dp"
+        android:padding="8dp"
 
         android:tint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"

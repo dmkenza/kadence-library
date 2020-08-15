@@ -153,6 +153,13 @@ fun Long.getTimestamp(pattern: String = ""): String {
 }
 
 
+fun Long.getTimestamp(df: SimpleDateFormat): String {
+     
+    return df.format(Date(this))
+}
+
+
+
 /** Encode url string for http  request*/
 
 fun String.encodeForHttpRequest(code: String = "UTF-8"): String {

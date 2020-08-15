@@ -41,6 +41,8 @@ dependencies {
     api group: 'com.github.fracpete', name: 'sizeofag', version: '1.0.4'
 
 
+
+
     // log viewer
     api 'com.github.sanyinchen:LogView:v1.0'
 

@@ -3,10 +3,11 @@
 
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
 
     android:id="@+id/container_profile"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:layout_marginStart="16dp"
     android:layout_marginTop="8dp"
     android:layout_marginBottom="8dp"
@@ -19,20 +20,27 @@
 
     <LinearLayout
         android:id="@+id/layout_border"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
 
         android:background="@drawable/shape_circle"
+
+        android:gravity="center"
         android:padding="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/img"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             app:srcCompat="@android:color/holo_blue_bright"
+
+            tools:layout_height="60dp"
+            tools:layout_width="60dp"
+
             />
     </LinearLayout>
 
