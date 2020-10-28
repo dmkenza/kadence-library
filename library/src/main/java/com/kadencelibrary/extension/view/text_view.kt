@@ -4,7 +4,6 @@ import android.os.Build
 import android.text.Html
 import android.text.InputFilter
 import android.widget.TextView
-import androidx.emoji.text.EmojiCompat
 import com.kadencelibrary.extension.text.getColoredHTMLText
 import java.lang.ref.WeakReference
 
@@ -43,14 +42,13 @@ fun TextView.setAllCapsFilter() {
 
 
 /** Support emoji, fix some device don't show emoji correctly.  */
-
-fun TextView.setTextWithEmoji(text: String) {
-
-    val weakTv = WeakReference<TextView>(this)
-    EmojiCompat.get().registerInitCallback(object : EmojiCompat.InitCallback() {
-        override fun onInitialized() {
-            val compat = EmojiCompat.get()
-            weakTv.get()?.text = compat.process(text)
-        }
-    })
-}
+//fun TextView.setTextWithEmoji(text: String) {
+//
+//    val weakTv = WeakReference<TextView>(this)
+//    EmojiCompat.get().registerInitCallback(object : EmojiCompat.InitCallback() {
+//        override fun onInitialized() {
+//            val compat = EmojiCompat.get()
+//            weakTv.get()?.text = compat.process(text)
+//        }
+//    })
+//}
